@@ -139,8 +139,22 @@
             $db = new DB();
             $connect = $db->connect();
 
+            $productos = [];
+            $sql = "SELECT * FROM productos WHERE prd_id = :id_producto"; 
+            $query = $connect -> prepare($sql); 
+            $query -> execute([
+            'id_producto' => $data['id_producto']
+            ]); 
+            $results = $query -> fetchAll(PDO::FETCH_OBJ);
+            if($query -> rowCount() > 0)   { 
+                foreach($results as $result) { 
+                    array_push($productos, $result);
+               }
+            }
+
+            $producto = $productos[0];
             //Metodo que valida la cantidad del stock con la cantidad registrda
-            if ($data['cantidad']>$data['stock']){
+            if ($data['cantidad']>$producto->prd_stock){
                 echo '
                 <div class="alert alert-success alert-dismissible fade show mr-5 ml-5" role="alert">
                   <strong>No se puede ingresar una cantidad mas alta de la que esta disponible</strong>
@@ -149,6 +163,44 @@
                 </div>
                 ';
                 exit;
+            }else{
+                if($productos>0){
+
+                    $stock = $producto->prd_stock - $data['cantidad'];
+
+                    $sql = "INSERT INTO ventas (vnt_prd_id, vnt_cantidad) VALUES (:vnt_prd_id, :vnt_cantidad)";  
+                    $statement = $connect->prepare($sql);
+                    $statement->bindParam(':vnt_prd_id', $data['id_producto'], PDO::PARAM_INT);
+                    $statement->bindParam(':vnt_cantidad', $data['cantidad'], PDO::PARAM_INT);
+                    $statement->execute();
+
+                    $sql2 = "UPDATE productos SET prd_stock = :prd_stock WHERE prd_id = :prd_id"; 
+                    $statement = $connect->prepare($sql2);
+                    $statement->bindParam(':prd_stock', $stock, PDO::PARAM_INT);
+                    $statement->bindParam(':prd_id', $data['id_producto'], PDO::PARAM_INT);
+                    $statement->execute();      
+                }
+            }
+            /*else if($productos>0){
+
+                $stock = $data['stock'] - $data['cantidad'];
+
+                $sql = "UPDATE ventas SET vnt_cantidad = :vnt_cantidad WHERE vnt_prd_id =:vnt_prd_id";  
+                $statement = $connect->prepare($sql);
+                $statement->bindParam(':vnt_prd_id', $data['id_producto'], PDO::PARAM_INT);
+                $statement->bindParam(':vnt_cantidad', $data['cantidad'], PDO::PARAM_INT);
+                $statement->execute();    
+
+                $sql2 = "UPDATE productos SET prd_stock = :prd_stock WHERE prd_id = :prd_id"; 
+                $statement = $connect->prepare($sql2);
+                $statement->bindParam(':prd_stock', $stock, PDO::PARAM_INT);
+                $statement->bindParam(':prd_id', $data['id_producto'], PDO::PARAM_INT);
+                $statement->execute();        
+
+                $resultado = $connect->lastInsertId();
+            //print_r($resultado);
+                $connect = null;
+
             }else{
                 $stock = $data['stock'] - $data['cantidad'];
 
@@ -167,7 +219,7 @@
                 $resultado = $connect->lastInsertId();
             //print_r($resultado);
                 $connect = null;
-            }
+            }*/
         }
 
 
