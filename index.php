@@ -3,6 +3,8 @@
     $productos = new _productos();
     $get_productos = $productos->getProductos();
     $get_ventas = $productos->getVentas();
+    $get_max_stock = $productos->getProductoMayorStock();
+    $get_max_ventas = $productos->getProductoMayorVentas();
  ?>
 
  
@@ -18,6 +20,7 @@
   </div>
 </div>
     
+    <!-- Tabla que imprime los datos de la tabla productos -->
     <h2>Inventario de productos</h2>
     <table class="table table-striped">
         <thead>
@@ -61,7 +64,8 @@
       </table>
 
 
-      <h2>Ventas realizadas</h2>
+    <!-- Tabla que imprime los datos de la tabla ventas -->
+    <h2>Ventas realizadas</h2>
     <table class="table table-striped">
         <thead>
           <tr>
@@ -95,5 +99,26 @@
         <tbody>
       </table>
 
+      <?php
+          if ($get_max_stock>0) {
+            foreach ($get_max_stock as $fila) {
+              ?>
+                  <p class="form-control"> EL PRODUCTO CON MAYOR CANTIDAD DE STOCK ES : "<?php echo $fila->prd_nombre; ?>" CON UNA CANTIDAD DE <?php echo $fila->stock; ?> STOCKS DISPONIBLES.</p>
+              <?php
+            }
+          }
+       ?>
+
+       <?php
+          if ($get_max_ventas>0) {
+            foreach ($get_max_ventas as $fila) {
+              ?>
+                  <p class="form-control"> EL PRODUCTO MAS VENDIDO ES : "<?php echo $fila->prd_nombre; ?>" CON UNA CANTIDAD DE <?php echo $fila->ventas; ?> PRODUCTOS VENDIDOS.</p>
+              <?php
+            }
+          }
+       ?>
+
+      
 
 <?php include "templates/footer.php"; ?>

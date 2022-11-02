@@ -36,7 +36,7 @@ if ($get_productos>0) {
     foreach ($get_productos as $fila) {
   ?>
 
-  <div class="container">
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <h2 class="mt-4">Comprar un producto</h2>
