@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2022 a las 20:04:20
+-- Tiempo de generación: 02-11-2022 a las 21:29:43
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.13
 
@@ -38,18 +38,6 @@ CREATE TABLE `productos` (
   `prd_creado` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`prd_id`, `prd_nombre`, `prd_referencia`, `prd_precio`, `prd_peso`, `prd_categoria`, `prd_stock`, `prd_creado`) VALUES
-(14, 'ALEXANDER', 'AAAAAAAAAAAA', 50000, 21, 'as', 0, '2022-11-02'),
-(16, 'ALEXANDER', 'REFERENCIA C', 8800, 34, 'asda', 1, '2022-11-02'),
-(17, 'EXAMENES MEDICOS', 'QQQQQQQQ', 1111111, 222222, 'QQQQQQQQQ', 0, '2022-11-02'),
-(18, 'EXAMENES MEDICOS', 'HEY', 76, 21, 'asda', 1, '2022-11-02'),
-(19, 'RODRIGUEZ.GERMAN', 'REFERENCIA C', 8800, 5, 'da', 0, '2022-11-02'),
-(20, 'QQQQQQ', 'QQQQQQQQ', 230, 222, 'ADA', 0, '2022-11-02');
-
 -- --------------------------------------------------------
 
 --
@@ -61,15 +49,6 @@ CREATE TABLE `ventas` (
   `vnt_prd_id` int(11) NOT NULL,
   `vnt_cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `ventas`
---
-
-INSERT INTO `ventas` (`vnt_id`, `vnt_prd_id`, `vnt_cantidad`) VALUES
-(8, 14, 1),
-(10, 19, 1),
-(11, 20, 1);
 
 --
 -- Índices para tablas volcadas

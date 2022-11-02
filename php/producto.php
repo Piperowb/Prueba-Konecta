@@ -109,6 +109,31 @@
         }
 
 
+        //Funcion que elimina los registros de la tabla de productos y ventas
+        //Los registros de ventas se eliminaran si se borra el registro de productos
+        function postEliminar($data) {
+
+            $db = new DB();
+            $connect = $db->connect();
+
+            $sql = "DELETE FROM ventas WHERE vnt_prd_id = :vnt_prd_id"; 
+            $statement = $connect->prepare($sql);
+            $statement->bindParam(':vnt_prd_id', $data['id'], PDO::PARAM_STR);
+            $statement->execute();
+
+
+            $sql2 = "DELETE FROM productos WHERE prd_id = :prd_id"; 
+            $statement = $connect->prepare($sql2);
+            $statement->bindParam(':prd_id', $data['id'], PDO::PARAM_STR);
+            $statement->execute();           
+
+            $resultado = $connect->lastInsertId();
+            //print_r($resultado);
+            $connect = null;
+            
+        }
+
+
         //Funcion para traer los datos de las ventas realizadas
         function getVentas() {
 
@@ -250,8 +275,7 @@
             $db = new DB();
             $connect = $db->connect();
             $productos = [];
-            $sql = "SELECT prd_nombre, MAX(`vnt_cantidad`) as ventas FROM ventas INNER JOIN productos
-            ON ventas.vnt_prd_id = productos.prd_id"; 
+            $sql = "SELECT prd_nombre, SUM(vnt.vnt_cantidad) AS ventas FROM productos prd INNER JOIN ventas vnt ON(vnt.vnt_prd_id = prd.prd_id) GROUP BY prd.prd_id ORDER BY ventas DESC"; 
             $query = $connect -> prepare($sql); 
             $query -> execute(); 
             $results = $query -> fetchAll(PDO::FETCH_OBJ);

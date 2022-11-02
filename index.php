@@ -99,6 +99,7 @@
         <tbody>
       </table>
 
+      <h2>Producto con mas stock</h2>
       <?php
           if ($get_max_stock>0) {
             foreach ($get_max_stock as $fila) {
@@ -109,16 +110,30 @@
           }
        ?>
 
-       <?php
+
+    <h2>Producto mas vendido</h2>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Numero de ventas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
           if ($get_max_ventas>0) {
             foreach ($get_max_ventas as $fila) {
               ?>
-                  <p class="form-control"> EL PRODUCTO MAS VENDIDO ES : "<?php echo $fila->prd_nombre; ?>" CON UNA CANTIDAD DE <?php echo $fila->ventas; ?> PRODUCTOS VENDIDOS.</p>
+              <tr>
+                <td><?php echo $fila->prd_nombre; ?></td>
+                <td><?php echo $fila->ventas; ?></td>
+              </tr>
               <?php
             }
           }
-       ?>
-
+          ?>
+        <tbody>
+      </table>
       
 
 <?php include "templates/footer.php"; ?>
