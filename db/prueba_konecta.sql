@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2022 a las 18:03:02
+-- Tiempo de generación: 02-11-2022 a las 20:04:20
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.13
 
@@ -43,12 +43,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`prd_id`, `prd_nombre`, `prd_referencia`, `prd_precio`, `prd_peso`, `prd_categoria`, `prd_stock`, `prd_creado`) VALUES
-(14, 'ALEXANDER', 'AAAAAAAAAAAA', 50000, 21, 'as', 1, '2022-11-02'),
-(16, 'ALEXANDER', 'REFERENCIA C', 8800, 34, 'asda', 2, '2022-11-02'),
-(17, 'EXAMENES MEDICOS', 'QQQQQQQQ', 1111111, 222222, 'QQQQQQQQQ', 2, '2022-11-02'),
+(14, 'ALEXANDER', 'AAAAAAAAAAAA', 50000, 21, 'as', 0, '2022-11-02'),
+(16, 'ALEXANDER', 'REFERENCIA C', 8800, 34, 'asda', 1, '2022-11-02'),
+(17, 'EXAMENES MEDICOS', 'QQQQQQQQ', 1111111, 222222, 'QQQQQQQQQ', 0, '2022-11-02'),
 (18, 'EXAMENES MEDICOS', 'HEY', 76, 21, 'asda', 1, '2022-11-02'),
-(19, 'RODRIGUEZ.GERMAN', 'REFERENCIA C', 8800, 5, 'da', 1, '2022-11-02'),
-(20, 'QQQQQQ', 'QQQQQQQQ', 230, 222, 'ADA', 1, '2022-11-02');
+(19, 'RODRIGUEZ.GERMAN', 'REFERENCIA C', 8800, 5, 'da', 0, '2022-11-02'),
+(20, 'QQQQQQ', 'QQQQQQQQ', 230, 222, 'ADA', 0, '2022-11-02');
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,9 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`vnt_id`, `vnt_prd_id`, `vnt_cantidad`) VALUES
-(8, 14, 1);
+(8, 14, 1),
+(10, 19, 1),
+(11, 20, 1);
 
 --
 -- Índices para tablas volcadas
@@ -100,7 +102,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `vnt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `vnt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
