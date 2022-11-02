@@ -5,43 +5,18 @@
  ?>
 
  
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear - CRUD PHP</title>
-</head>
-<body>
-    <form action="index.php" method="post">
-        <p>
-            <label for="nombre">Nombre del producto:</label>
-            <input id="nombre" type="text" name="nombre">
-        </p>
-        <p>
-            <label for="referencia">Autor</label>
-            <input id="referencia" type="text" name="referencia">
-        </p>
-        <p>
-            <label for="precio">Precio</label>
-            <input id="precio" type="number" name="precio">
-        </p>
-        <p>
-            <label for="peso">Peso</label>
-            <input id="peso" type="number" name="peso">
-        </p>
-        <p>
-            <label for="categoria">Categoria:</label>
-            <input id="categoria" type="text" name="categoria">
-        </p>
-        <p>
-            <label for="stock">Stock:</label>
-            <input id="stock" type="number" name="stock">
-        </p>
+<?php include "templates/header.php"; ?>
 
-        <p>
-            <input type="submit" value="Guardar">
-        </p>
-    </form>
+    
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <a href="crear.php"  class="btn btn-primary mt-4">Crear alumno</a>
+      <hr>
+    </div>
+  </div>
+</div>
+
 
     <table class="table">
         <thead>
@@ -54,6 +29,7 @@
             <th>Categoria</th>
             <th>Stock</th>
             <th>Fecha creacion</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +46,10 @@
                 <td><?php echo $fila->prd_categoria; ?></td>
                 <td><?php echo $fila->prd_stock; ?></td>
                 <td><?php echo $fila->prd_creado; ?></td>
+                <td>
+                  <a href="<?='borrar.php?id='.$fila->prd_id; ?>">🗑️Borrar</a>
+                  <a href="<?='editar.php?id='.$fila->prd_id; ?>">✏️Editar</a>
+                </td>
               </tr>
               <?php
             }
@@ -78,26 +58,5 @@
         <tbody>
       </table>
 
-            <?php 
 
-                print_r($_POST);
-
-                if (isset($_POST['nombre'])) {                 
-                    $post = [
-                    'nombre'                   => $_POST['nombre'],
-                    'referencia'               => $_POST['referencia'],
-                    'precio'                   => $_POST['precio'],
-                    'peso'                     => $_POST['peso'],
-                    'categoria'                => $_POST['categoria'],
-                    'stock'                    => $_POST['stock'],
-
-                ];
-
-                $productos->postCrear($post);
-
-                } 
-
-                ?>
-
-</body>
-</html>
+<?php include "templates/footer.php"; ?>
