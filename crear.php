@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="mt-4">Crea un alumno</h2>
+      <h2 class="mt-4">Crea un producto</h2>
       <hr>
       <form action="crear.php" method="post">
         <div class="form-group">
@@ -63,7 +63,7 @@
                 ];
 
                 $productos->postCrear($post);
-
+                header('Location: index.php');
                 } 
 
                 ?>

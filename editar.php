@@ -16,7 +16,7 @@ if (isset($_POST['nombre'])) {
         ];
 
         $productos->postEditar($post);
-
+        header('Location: index.php');
   ?>
 
   <div class="container mt-2">
@@ -46,7 +46,7 @@ if ($get_productos>0) {
       <hr>
       <form action="editar.php?id=<?=$_GET['id']?>" method="post">
         <div class="form-group">
-          <label for="id">Id del producto:</label>
+          <label hidden for="id">Id del producto:</label>
           <input type="text" name="id" id="id" class="form-control" value="<?= $fila->prd_id; ?>" hidden required>
         </div>
         <div class="form-group">
